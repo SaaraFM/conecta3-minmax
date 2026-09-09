@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conecta 3 - Jogo competitivo Humano vs IA com algoritmo MinMax">
+    <meta name="theme-color" content="#2c3e8f">
+    <title>Conecta 3 - Humano vs IA com MinMax</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Conecta 3</h1>
+                <p class="subtitle">Humano vs Inteligência Artificial</p>
+                <p class="subtitle-small">Algoritmo MinMax</p>
+            </div>
+            <div class="header-controls">
+                <button id="btnSound" class="btn-control" title="Ativar/desativar som">🔊 Som</button>
+                <button id="btnHowItWorks" class="btn-control" title="Como funciona o MinMax">❓ MinMax</button>
+            </div>
+        </header>
+
+        <section class="scoreboard">
+            <div class="score-item score-human">
+                <div class="score-player-label">VOCÊ</div>
+                <div class="score-player-color"></div>
+                <div class="score-value" id="scoreHuman">0</div>
+            </div>
+            <div class="score-info">
+                <div class="turn-indicator" id="turnIndicator">SUA VEZ</div>
+            </div>
+            <div class="score-item score-ia">
+                <div class="score-player-label">IA</div>
+                <div class="score-player-color"></div>
+                <div class="score-value" id="scoreIA">0</div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <section class="board-section">
+                <div class="game-wrapper">
+                    <div class="board-container">
+                        <div class="board-background">
+                            <div id="gameBoard" class="board"></div>
+                            <div class="board-overlay"></div>
+                        </div>
+                        <div class="board-base"></div>
+                        <div class="board-feet"></div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="btnNewGame" class="btn-primary">Nova Partida</button>
+                    <button id="btnResetScore" class="btn-secondary">Reiniciar Placar</button>
+                </div>
+
+                <div id="messageBox" class="message-box"></div>
+            </section>
+
+            <aside class="analysis-panel">
+                <h2>Análise MinMax</h2>
+                <div class="panel-content">
+                    <div class="player-info">
+                        <div class="player-role"><strong>IA</strong> <span class="role-badge max">MAX ↑</span></div>
+                        <div class="role-explanation">Maximiza o valor</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-role"><strong>Humano</strong> <span class="role-badge min">MIN ↓</span></div>
+                        <div class="role-explanation">Minimiza o valor</div>
+                    </div>
+                    <hr>
+                    <div id="analysisContent" class="analysis-content">
+                        <p class="placeholder">A análise aparecerá aqui durante a jogada da IA...</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <div id="modalMinMax" class="modal">
+        <div class="modal-content">
+            <button id="btnCloseModal" class="btn-close">&times;</button>
+            <h2>Como Funciona o Algoritmo MinMax?</h2>
+            <div class="modal-section">
+                <h3>1. Conceitos Fundamentais</h3>
+                <p><strong>Estado:</strong> A posição atual do tabuleiro.</p>
+                <p><strong>Ação:</strong> Cada coluna disponível é uma ação possível.</p>
+                <p><strong>Estado Terminal:</strong> Quando alguém vence ou o tabuleiro fica cheio.</p>
+            </div>
+            <div class="modal-section">
+                <h3>2. MAX e MIN</h3>
+                <p><strong>MAX (IA):</strong> Procura maximizar o valor.</p>
+                <p><strong>MIN (Humano):</strong> Durante simulação, minimiza o valor da IA.</p>
+            </div>
+            <div class="modal-section">
+                <h3>3. Recursão</h3>
+                <p>O algoritmo simula cada ação possível, alternando entre MAX e MIN até chegar a um estado terminal.</p>
+            </div>
+            <div class="modal-section">
+                <h3>4. Função de Utilidade</h3>
+                <ul>
+                    <li><strong>IA vence:</strong> +100 − profundidade</li>
+                    <li><strong>Humano vence:</strong> −100 + profundidade</li>
+                    <li><strong>Empate:</strong> 0</li>
+                </ul>
+            </div>
+            <button id="btnCloseModalBottom" class="btn-primary">Entendi!</button>
+        </div>
+    </div>
+
+    <div id="modalGameOver" class="modal">
+        <div class="modal-content modal-game-over">
+            <h2 id="gameOverTitle">JOGO ENCERRADO</h2>
+            <div id="gameOverContent" class="game-over-content"></div>
+            <button id="btnPlayAgain" class="btn-primary">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
